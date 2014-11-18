@@ -3,8 +3,29 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Bindster ToDo App</title>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/bindster.js"></script>
+
+    <script type="text/javascript">
+      var model = {
+          todoItem: "Let's Get Productive"
+      }
+    </script>
+
 </head>
+
 <body>
+
 <h1>Hello World!</h1>
+
+<input type="text" b:bind="todoItem" b:when="immediate"><br />
+
+
+<span b:bind="todoItem" />
+
+<script>
+  var bindster = new Bindster(model);
+</script>
+
 </body>
 </html>
