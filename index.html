@@ -10,6 +10,13 @@
       var model = {
           todoItem: "Let's Get Productive"
       }
+
+      function Controller(){};
+      Controller.prototype = {
+        addToDoItem: function(new_todo){
+          this.model.todoItem.push({todoItem: new_todo});
+        }
+      };
     </script>
 
 </head>
@@ -24,7 +31,7 @@
 <span b:bind="todoItem" />
 
 <script>
-  var bindster = new Bindster(model);
+  var bindster = new Bindster(model, 'view', new Controller());
 </script>
 
 </body>
