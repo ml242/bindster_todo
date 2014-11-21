@@ -7,32 +7,43 @@
     <script type="text/javascript" src="js/bindster.js"></script>
 
     <script type="text/javascript">
+      
       var model = {
-          todoItem: "Let's Get Productive"
+          todoItems: [
+            { todoItem: "Let's Get Productive" },
+          ]
       }
 
       function Controller(){};
+
       Controller.prototype = {
         addToDoItem: function(new_todo){
-          this.model.todoItem.push({todoItem: new_todo});
+          this.model.todoItems.push({todoItem: new_todo});
         }
-      };
+      }
+
     </script>
 
 </head>
 
 <body>
-
+<div id="view">
 <h1>Hello World!</h1>
 
-<input type="text" b:bind="todoItem" b:when="immediate"><br />
+<input type="text" b:bind="todoItem">
+
+<span b:onclick="{ controller.addToDoItem(todoItem) }" href="">Add New To Do</span> <br />
 
 
-<span b:bind="todoItem" />
+<b:iterate on="todoItems" index="ax">
+
+  <p b:bind="todoItems[ax].todoItem"></p>
+
+</b:iterate>
 
 <script>
   var bindster = new Bindster(model, 'view', new Controller());
 </script>
-
+</div>
 </body>
 </html>
