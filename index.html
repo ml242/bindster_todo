@@ -1,49 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:b="http://bindster.com/bindster.dtd">
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>Bindster ToDo App</title>
-    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-    <script type="text/javascript" src="js/bindster.js"></script>
+  <meta charset="UTF-8">
+  <title>Bindster ToDo App</title>
+  <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/bindster.js"></script>
 
-    <script type="text/javascript">
-      
-      var model = {
-          todoItems: [
-            { todoItem: "Let's Get Productive" },
-          ]
-      }
+  <script type="text/javascript">
 
-      function Controller(){};
+  var model = {
+    todoItems: [
+    { todoItem: "homework" },
+    { todoItem: "learn mongo" }
+    ],
+    addresses: [
+    {name: "Barack Obama", email:"prez@whitehouse.gov"},
+    {name: "George Bush", email:"gb@alumni.whitehouse.gov"}
+    ]
+  }
 
-      Controller.prototype = {
-        addToDoItem: function(new_todo){
-          this.model.todoItems.push({todoItem: new_todo});
-        }
-      }
+  function Controller(){};
 
-    </script>
+  Controller.prototype = {
+    addToDoItem: function(newToDo){
+      this.model.todoItems.push({todoItem: newToDo})
+    },
+    removeToDoItem: function (ax) {
+      this.model.todoItems.splice(ax, 1);
+    },
+  };
+
+  </script>
 
 </head>
 
 <body>
-<div id="view">
-<h1>Hello World!</h1>
-
-<input type="text" b:bind="todoItem">
-
-<span b:onclick="{ controller.addToDoItem(todoItem) }" href="">Add New To Do</span> <br />
+  <div id="view">
+    <h1>Hello World!</h1>
 
 
-<b:iterate on="todoItems" index="ax">
+    <span b:onclick="{ controller.addToDoItem('') }" href="">Add New To Do</span> <br />
 
-  <p b:bind="todoItems[ax].todoItem"></p>
 
-</b:iterate>
+    <b:iterate on="todoItems" index="ax">
 
-<script>
+    <input b:bind="todoItems[ax].todoItem"></input><a b:onclick="{controller.removeToDoItem(ax)}" href="">Remove</a><br />
+
+  </b:iterate>
+
+
+
+  <script>
   var bindster = new Bindster(model, 'view', new Controller());
-</script>
+  </script>
 </div>
 </body>
 </html>
